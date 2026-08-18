@@ -37,7 +37,7 @@ class InputHandler implements InputHandlerInterface
     /**
      * All available image decoders.
      */
-    public const array IMAGE_DECODERS = [
+    public const IMAGE_DECODERS = [
         ImageObjectDecoder::class,
         NativeObjectDecoder::class,
         StreamImageDecoder::class,
@@ -52,7 +52,7 @@ class InputHandler implements InputHandlerInterface
     /**
      * All available color decoders.
      */
-    public const array COLOR_DECODERS = [
+    public const COLOR_DECODERS = [
         NamedColorDecoder::class,
         ColorObjectDecoder::class,
         RgbHexColorDecoder::class,

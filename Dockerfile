@@ -1,4 +1,4 @@
-FROM php:8.3-cli
+FROM php:8.1-cli
 
 ARG IMAGEMAGICK_VERSION=7.1.2-25
 

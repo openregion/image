@@ -16,7 +16,7 @@ class HexColorDecoder extends AbstractDecoder implements DecoderInterface
     /**
      * Regex pattern of hexadecimal color syntax.
      */
-    protected const string PATTERN = '/^#?(?P<hex>[a-f\d]{3}(?:[a-f\d]?|(?:[a-f\d]{3}(?:[a-f\d]{2})?)?)\b)$/i';
+    protected const PATTERN = '/^#?(?P<hex>[a-f\d]{3}(?:[a-f\d]?|(?:[a-f\d]{3}(?:[a-f\d]{2})?)?)\b)$/i';
 
     /**
      * {@inheritdoc}

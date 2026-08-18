@@ -1,15 +1,17 @@
 # Intervention Image
 ## PHP Image Processing
 
-[![Latest Version](https://img.shields.io/packagist/v/intervention/image.svg)](https://packagist.org/packages/intervention/image)
-[![Build Status](https://github.com/Intervention/image/actions/workflows/run-tests.yml/badge.svg)](https://github.com/Intervention/image/actions)
-[![Monthly Downloads](https://img.shields.io/packagist/dm/intervention/image.svg)](https://packagist.org/packages/intervention/image/stats)
+[![Latest Version](https://img.shields.io/packagist/v/openregion/image.svg)](https://packagist.org/packages/openregion/image)
+[![Build Status](https://github.com/openregion/image/actions/workflows/run-tests.yml/badge.svg)](https://github.com/openregion/image/actions)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/openregion/image.svg)](https://packagist.org/packages/openregion/image/stats)
 [![Support me on Ko-fi](https://raw.githubusercontent.com/Intervention/image/develop/.github/images/support.svg)](https://ko-fi.com/interventionphp)
 
 Intervention Image is a **PHP image processing library** that provides a simple
 and expressive way to create, edit, and compose images. It comes with a universal
 interface for the popular PHP image manipulation extensions. You can
 choose between the GD library, Imagick or libvips as the base layer for all operations.
+
+This repository contains the `openregion/image` fork maintained for PHP 8.1+ compatibility.
 
 - Fluent interface for common image editing tasks
 - Interchangeable driver architecture with support for **GD, Imagick and libvips**
@@ -21,7 +23,7 @@ choose between the GD library, Imagick or libvips as the base layer for all oper
 Install this library using [Composer](https://getcomposer.org). Add the package with the following command:
 
 ```bash
-composer require intervention/image
+composer require openregion/image
 ```
 
 ## Getting Started
@@ -61,7 +63,7 @@ $encoded->save('images/example.jpg');
 
 Ensure that your server environment meets the following requirements before installation:
 
-- PHP >= 8.3
+- PHP >= 8.1
 - Mbstring PHP Extension
 - Image Processing PHP Extension (GD, Imagick or libvips)
 
@@ -81,6 +83,8 @@ If you discover any security related issues, please email oliver@intervention.io
 ## Authors
 
 This library is developed and maintained by [Oliver Vogel](https://intervention.io)
+
+This fork is co-maintained by [CIT Open Region](https://www.openregion.info/).
 
 Thanks to the community of [contributors](https://github.com/Intervention/image/graphs/contributors) who have helped to improve this project.
 
