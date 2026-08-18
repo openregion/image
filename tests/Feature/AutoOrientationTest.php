@@ -16,14 +16,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class AutoOrientationTest extends BaseTestCase
 {
-    private const array LANDSCAPE_TOP_LEFT = [2, 2];
-    private const array LANDSCAPE_TOP_RIGHT = [50, 2];
-    private const array LANDSCAPE_BOTTOM_LEFT = [2, 20];
-    private const array LANDSCAPE_BOTTOM_RIGHT = [50, 20];
-    private const array PORTRAIT_TOP_LEFT = [2, 2];
-    private const array PORTRAIT_TOP_RIGHT = [20, 2];
-    private const array PORTRAIT_BOTTOM_LEFT = [2, 50];
-    private const array PORTRAIT_BOTTOM_RIGHT = [20, 50];
+    private const LANDSCAPE_TOP_LEFT = [2, 2];
+    private const LANDSCAPE_TOP_RIGHT = [50, 2];
+    private const LANDSCAPE_BOTTOM_LEFT = [2, 20];
+    private const LANDSCAPE_BOTTOM_RIGHT = [50, 20];
+    private const PORTRAIT_TOP_LEFT = [2, 2];
+    private const PORTRAIT_TOP_RIGHT = [20, 2];
+    private const PORTRAIT_BOTTOM_LEFT = [2, 50];
+    private const PORTRAIT_BOTTOM_RIGHT = [20, 50];
 
     /**
      * @param array<array{'position': array<int>, 'colors': array<int>}> $colors

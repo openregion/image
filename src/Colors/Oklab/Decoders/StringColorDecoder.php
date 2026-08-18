@@ -18,7 +18,7 @@ class StringColorDecoder extends AbstractDecoder implements DecoderInterface
     /**
      * Regex pattern of oklab color syntax.
      */
-    private const string PATTERN =
+    private const PATTERN =
         '/^oklab ?\( ?' .
         '(?P<l>(1|0|0?\.[0-9]+)|[0-9\.]+%)((, ?)|( ))' .
         '(?P<a>(-?0|-?0?\.[0-9\.]+)|(-?[0-9\.]+%))((, ?)|( ))' .

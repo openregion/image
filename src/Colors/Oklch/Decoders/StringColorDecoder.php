@@ -18,7 +18,7 @@ class StringColorDecoder extends AbstractDecoder implements DecoderInterface
     /**
      * Regex pattern for oklch color syntax.
      */
-    protected const string PATTERN =
+    protected const PATTERN =
         '/^oklch ?\( ?' .
         '(?P<l>(1|0|0?\.[0-9]+)|[0-9\.]+%)((, ?)|( ))' .
         '(?P<c>(-?0|-?0?\.[0-9\.]+)|(-?[0-9\.]+%))((, ?)|( ))' .

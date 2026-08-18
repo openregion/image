@@ -15,7 +15,7 @@ class StringColorDecoder extends AbstractDecoder implements DecoderInterface
     /**
      * Regex pattern of HSL color syntax
      */
-    private const string PATTERN =
+    private const PATTERN =
     '/^hsla? ?\( ?' .
         '(?P<h>[0-9\.]+)(?:deg)?((, ?)| )' .
         '(?P<s>[0-9\.]+%?)((, ?)| )' .

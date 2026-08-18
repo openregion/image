@@ -21,7 +21,7 @@ abstract class AbstractEncoder implements EncoderInterface
     /**
      * Default encoding quality.
      */
-    public const int DEFAULT_QUALITY = 75;
+    public const DEFAULT_QUALITY = 75;
 
     /**
      * {@inheritdoc}

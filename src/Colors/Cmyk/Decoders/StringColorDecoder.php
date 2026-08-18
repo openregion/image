@@ -12,7 +12,7 @@ use Intervention\Image\Interfaces\DecoderInterface;
 
 class StringColorDecoder extends AbstractDecoder implements DecoderInterface
 {
-    private const string PATTERN =
+    private const PATTERN =
         '/^cmyk ?\(' .
         '(?P<c>[0-9\.]+%?)((, ?)| )' .
         '(?P<m>[0-9\.]+%?)((, ?)| )' .

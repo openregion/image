@@ -13,7 +13,7 @@ class DataUri implements DataUriInterface
     /**
      * Pattern of data uri scheme.
      */
-    protected const string PATTERN = "/^data:(?P<mediaType>\w+\/[-+.\w]+)?" .
+    protected const PATTERN = "/^data:(?P<mediaType>\w+\/[-+.\w]+)?" .
         "(?P<parameters>(;[-\w]+=[-\w]+)*)(?P<base64>;base64)?,(?P<data>.*)/";
 
     /**

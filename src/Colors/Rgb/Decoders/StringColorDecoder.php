@@ -16,7 +16,7 @@ class StringColorDecoder extends AbstractDecoder implements DecoderInterface
     /**
      * Regex pattern of rgb color syntax.
      */
-    private const string PATTERN =
+    private const PATTERN =
     '/^s?rgba? ?\( ?' .
         '(?P<r>[0-9]{1,3})([, ]) ?' .
         '(?P<g>[0-9]{1,3})\2 ?' .
