@@ -14,7 +14,9 @@ use Intervention\Image\Interfaces\ColorInterface;
 use Intervention\Image\Interfaces\ImageInterface;
 use Intervention\Image\Interfaces\PaletteInterface;
 use Intervention\Image\Interfaces\SizeInterface;
+use Intervention\Image\Random\GammaSection;
 use Random\Engine\Mt19937;
+use Random\RandomException;
 use Random\Randomizer;
 
 class DominantPaletteAnalyzer extends AbstractPaletteAnalyzer
@@ -48,6 +50,7 @@ class DominantPaletteAnalyzer extends AbstractPaletteAnalyzer
      * Create new instance.
      *
      * @throws InvalidArgumentException
+     * @throws RandomException
      */
     public function __construct(protected int $limit = 8, protected ?SizeInterface $region = null)
     {
@@ -63,6 +66,7 @@ class DominantPaletteAnalyzer extends AbstractPaletteAnalyzer
      *
      * @throws InvalidArgumentException
      * @throws AnalyzerException
+     * @throws RandomException
      */
     public function analyze(ImageInterface $image): PaletteInterface
     {
@@ -213,7 +217,7 @@ class DominantPaletteAnalyzer extends AbstractPaletteAnalyzer
             }
 
             // choose next centroid with weighted probability (deterministic with seed)
-            $target = $this->rng->getFloat(0, $sumDistances);
+            $target = $this->randomFloat($sumDistances);
 
             $cumulative = 0.0;
             $chosenIndex = 0;
@@ -335,7 +339,35 @@ class DominantPaletteAnalyzer extends AbstractPaletteAnalyzer
     }
 
     /**
+     * Generate a random float in the right-open interval from zero to the given maximum.
+     */
+    private function randomFloat(float $max): float
+    {
+        $native = self::nativeFloat($this->rng, $max);
+
+        return $native ?? GammaSection::closedOpen($this->rng, $max);
+    }
+
+    /**
+     * Use the native method when it is available in the current PHP runtime.
+     *
+     * The generic object type bridges the different Randomizer APIs exposed by PHP 8.1-8.3.
+     */
+    private static function nativeFloat(object $randomizer, float $max): ?float
+    {
+        if (!method_exists($randomizer, 'getFloat')) {
+            return null;
+        }
+
+        $result = $randomizer->getFloat(0, $max);
+
+        return is_float($result) ? $result : null;
+    }
+
+    /**
      * Re-seed local RNG.
+     *
+     * @throws RandomException
      */
     private function randomize(): void
     {
