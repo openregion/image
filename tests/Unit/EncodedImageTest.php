@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Intervention\Image\Tests\Unit;
 
+use JsonSerializable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Intervention\Image\EncodedImage;
 use Intervention\Image\Tests\BaseTestCase;
@@ -50,6 +51,13 @@ final class EncodedImageTest extends BaseTestCase
     {
         $image = new EncodedImage('foo');
         $this->assertEquals('foo', (string) $image);
+    }
+
+    public function testNotJsonSerializable(): void
+    {
+        // Frameworks like Laravel force application/json responses for JsonSerializable content.
+        $image = new EncodedImage('foo');
+        $this->assertNotInstanceOf(JsonSerializable::class, $image);
     }
 
     public function testMediaType(): void
