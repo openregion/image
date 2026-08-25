@@ -25,6 +25,7 @@
     "require": {
         "php": "^8.1",
         "ext-mbstring": "*",
+        "arokettu/random-polyfill": "^1.0.6",
         "openregion/gif": "^5.0"
     },
     "replace": {

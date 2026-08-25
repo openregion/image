@@ -12,6 +12,7 @@ use Intervention\Image\Interfaces\PaletteInterface;
 use Intervention\Image\Interfaces\SizeInterface;
 use Intervention\Image\Interfaces\ThemeDefinitionInterface;
 use Intervention\Image\Interfaces\ThemeInterface;
+use Random\RandomException;
 
 class ColorExtractor
 {
@@ -37,6 +38,7 @@ class ColorExtractor
      * Extract the visually dominant colors in the image, starting with the most dominant ones.
      *
      * @throws InvalidArgumentException
+     * @throws RandomException
      */
     public function dominant(int $limit = 8, ?SizeInterface $region = null): PaletteInterface
     {
