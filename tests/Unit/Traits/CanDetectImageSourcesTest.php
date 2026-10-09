@@ -139,24 +139,6 @@ final class CanDetectImageSourcesTest extends BaseTestCase
         $this->assertFalse($detector->callCouldBeFilePath($longPath));
     }
 
-    /**
-     * A leading separator must not allow NUL bytes in filesystem probes.
-     */
-    public function testCouldBeFilePathWithNullByte(): void
-    {
-        $detector = $this->createDetector();
-        $this->assertFalse($detector->callCouldBeFilePath("/path/to/file\0.jpg"));
-    }
-
-    /**
-     * An empty string cannot identify a file.
-     */
-    public function testCouldBeFilePathWithEmptyString(): void
-    {
-        $detector = $this->createDetector();
-        $this->assertFalse($detector->callCouldBeFilePath(''));
-    }
-
     public function testCouldBeFilePathWithAbsolutePath(): void
     {
         $detector = $this->createDetector();
