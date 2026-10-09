@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Intervention\Image\Tests\Unit\Drivers\Imagick\Encoders;
 
 use Generator;
+use Imagick;
+use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\Drivers\Imagick\Encoders\PngEncoder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
@@ -23,6 +25,7 @@ final class PngEncoderTest extends ImagickTestCase
     {
         $image = $this->createTestImage(3, 2);
         $encoder = new PngEncoder();
+        $encoder->setDriver(new Driver());
         $result = $encoder->encode($image);
         $this->assertMediaType('image/png', $result);
         $this->assertEquals('image/png', $result->mimetype());
@@ -33,15 +36,33 @@ final class PngEncoderTest extends ImagickTestCase
     {
         $image = $this->createTestImage(3, 2);
         $encoder = new PngEncoder(interlaced: true);
+        $encoder->setDriver(new Driver());
         $result = $encoder->encode($image);
         $this->assertMediaType('image/png', $result);
         $this->assertEquals('image/png', $result->mimetype());
         $this->assertTrue($this->isInterlacedPng($result));
     }
 
+    public function testEncodeStripExif(): void
+    {
+        $image = $this->readTestImage('exif.jpg');
+        $this->assertEquals('Oliver Vogel', $image->exif('IFD0.Artist'));
+
+        $encoder = new PngEncoder(strip: true);
+        $encoder->setDriver(new Driver());
+        $result = $encoder->encode($image);
+        $this->assertMediaType('image/png', $result);
+        $this->assertEquals('image/png', $result->mimetype());
+
+        $imagick = new Imagick();
+        $imagick->readImageBlob((string) $result);
+        $this->assertEmpty($imagick->getImageProperty('exif:Artist'));
+    }
+
     #[DataProvider('indexedDataProvider')]
     public function testEncoderIndexed(ImageInterface $image, PngEncoder $encoder, string $result): void
     {
+        $encoder->setDriver(new Driver());
         $this->assertEquals(
             $result,
             $this->pngColorType($encoder->encode($image)),
@@ -55,6 +76,7 @@ final class PngEncoderTest extends ImagickTestCase
             new PngEncoder(indexed: false),
             'truecolor-alpha',
         ];
+
         yield [
             static::createTestImage(3, 2), // new
             new PngEncoder(indexed: true),
@@ -64,8 +86,9 @@ final class PngEncoderTest extends ImagickTestCase
         yield [
             static::createTestImage(3, 2)->fill('ccc'), // new grayscale
             new PngEncoder(indexed: true),
-            'indexed',
+            version_compare(static::imagickVersion(), '7.0.0', '>=') ? 'grayscale' : 'indexed',
         ];
+
         yield [
             static::readTestImage('circle.png'), // truecolor-alpha
             new PngEncoder(indexed: false),
@@ -76,21 +99,25 @@ final class PngEncoderTest extends ImagickTestCase
             new PngEncoder(indexed: true),
             'grayscale-alpha', // result should be 'indexed' but there seems to be no way to force this with imagick
         ];
+
         yield [
             static::readTestImage('tile.png'), // indexed
             new PngEncoder(indexed: false),
             'truecolor-alpha',
         ];
+
         yield [
             static::readTestImage('tile.png'), // indexed
             new PngEncoder(indexed: true),
             'indexed',
         ];
+
         yield [
             static::readTestImage('test.jpg'), // jpeg
             new PngEncoder(indexed: false),
             'truecolor-alpha',
         ];
+
         yield [
             static::readTestImage('test.jpg'), // jpeg
             new PngEncoder(indexed: true),
