@@ -24,22 +24,22 @@ class DominantPaletteAnalyzer extends AbstractPaletteAnalyzer
     /**
      * Maximum iterations for K-means algorithm.
      */
-    private const int MAX_ITERATIONS = 50;
+    private const MAX_ITERATIONS = 50;
 
     /**
      * Convergence threshold (if centroids move less than this, stop early).
      */
-    private const float CONVERGENCE_THRESHOLD = 0.001;
+    private const CONVERGENCE_THRESHOLD = 0.001;
 
     /**
      * Minimum cluster size percentage to include in results (filters out noise).
      */
-    private const float MIN_CLUSTER_SIZE_PERCENT = 1.0;
+    private const MIN_CLUSTER_SIZE_PERCENT = 1.0;
 
     /**
      * Fixed seed for deterministic results.
      */
-    private const int SEED = 1024;
+    private const SEED = 1024;
 
     /**
      * Local RNG.
